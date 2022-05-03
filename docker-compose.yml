@@ -15,7 +15,7 @@ services:
       -  db:/var/lib/postgresql/data/
     networks:
       - backend
-    container_name: database-pg
+    container_name: DATABASE-POSTGRES
   
   api-service:
     depends_on:
@@ -38,7 +38,7 @@ services:
     networks:
       - backend
       - frontend
-    container_name: backend-express
+    container_name: BACKEND-EXPRESS
 
   
 

@@ -1,4 +1,4 @@
-# template-app5
+# btt-app
 ## Specife .env and backend/.env or docker-compose.yml files with your requirements
 ### backend/.env:
 - variables needed to specify backend/config/db-config.js, generally sequelize setup(only that isn't define in .env or docker-compose.yml, in this case only SQL_DEBUG)
@@ -17,27 +17,24 @@
 ## First:
     $ sudo su
 
-## To run:
-    $ docker-compose up
+## To build and create:
+    $ docker-compose create --build
 
-## To run and rebuild image:
-    $ docker-compose up --build
+## To run database container:
+    $ docker container start  DATABASE-POSTGRES
+
+## To create database:
+    $ docker exec -d  DATABASE-POSTGRES  psql  -h localhost -U postgres -c "create database btt_db"
+
+## To run:
+    $ docker-compose up -d
+
 
 ## To stop:
     $ docker-compose down
 
 ## To remove all: 
     $ docker-compose down --rmi all
-## Server api listen local(host) on: localhost:6868
-
-
-
-## After first docker-compose up --build and before first executing application has to create database:
-
-### Option 1:
-    $ sudo docker exec -it  database-pg  psql  -h localhost -U postgres -c "create database btt_db"
-    
-    $ docker-compose up --build
 
 ## Open application
     http://localhost:6868
