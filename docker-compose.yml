@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db-service:
+    image: postgres:13-alpine
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$PG_DB_USER
+      - POSTGRES_PASSWORD=$PG_DB_ROOT_PASSWORD
+      - POSTGRES_DB=$PG_DB_DATABASE
+    ports:
+      - $PG_DB_LOCAL_PORT:$PG_DB_DOCKER_PORT
+    volumes:
+      -  db:/var/lib/postgresql/data/
+    networks:
+      - backend
+    container_name: database-pg
+  
+  api-service:
+    depends_on:
+      - db-service
+    build: ./backend
+    restart: unless-stopped
+    env_file: ./.env
+    volumes:
+      - ./backend:/backend-app
+      - /backend-app/node_modules
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=db-service
+      - DB_USER=$PG_DB_USER
+      - DB_PASSWORD=$PG_DB_ROOT_PASSWORD
+      - DB_NAME=$PG_DB_DATABASE
+      - DB_PORT=$PG_DB_DOCKER_PORT
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+    networks:
+      - backend
+      - frontend
+    container_name: backend-express
+
+  
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:
