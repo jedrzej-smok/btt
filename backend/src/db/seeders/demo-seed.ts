@@ -15,6 +15,8 @@ export const seed = async() : Promise<void|string> => {
         instructions: 'test',
         ingredientsNumber: 'test',
         ytLink: 'test',
+        queryName: 'test-query',
+        imagePath: 'path',
         creationDate:new Date(),
         updatedOn:new Date(),
         deletionDate:null

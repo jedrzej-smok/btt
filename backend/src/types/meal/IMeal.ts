@@ -4,6 +4,8 @@ export interface IMeal{
     id: number,
     name:string,
     instructions: string,
-    ingredientsNumber: string,
-    ytLink: string
+    ingredientsNumber: number,
+    ytLink: string,
+    queryName: string,
+    imagePath: string,
 }

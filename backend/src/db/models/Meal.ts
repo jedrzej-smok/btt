@@ -31,6 +31,12 @@ export class Meal extends Model<Meal> {
   @Column(DataType.TEXT)
   ytLink: string;
 
+  @Column(DataType.TEXT)
+  queryName: string;
+
+  @Column(DataType.TEXT)
+  imagePath: string;
+
 
 
   @CreatedAt
