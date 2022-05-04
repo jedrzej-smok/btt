@@ -18,7 +18,7 @@ export class Meal extends Model<Meal> {
   @PrimaryKey
   @Column
   id!: number;
-
+  @Unique
   @Column(DataType.TEXT)
   name: string;
 
