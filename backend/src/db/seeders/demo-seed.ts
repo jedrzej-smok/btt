@@ -17,7 +17,7 @@ export const seed = async() : Promise<void|string> => {
         ytLink: 'test',
         creationDate:new Date(),
         updatedOn:new Date(),
-        deletionDate:new Date(null),
+        deletionDate:null
       } ,
     ]
     await queryInterface.bulkInsert('Meals',inserts);
