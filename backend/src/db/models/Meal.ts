@@ -34,12 +34,12 @@ export class Meal extends Model<Meal> {
 
 
   @CreatedAt
-  creationDate!: Date;
+  creationDate: Date;
 
   @UpdatedAt
-  updatedOn!: Date;
+  updatedOn: Date;
 
   @DeletedAt
-  deletionDate!: Date;
+  deletionDate: Date;
 
 }

@@ -9,7 +9,7 @@ mealRouter
     .get('/:name', async (req, res, next) => {
         try {
             const {count, rows} = await Meal.findAndCountAll({
-                where: {name: req.params.name},
+                //where: {name: req.params.name},
                 // include:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
             if(count>0) {
