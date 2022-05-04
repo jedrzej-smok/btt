@@ -1,18 +1,25 @@
 import {Router} from 'express';
 import {Meal} from '../db/models/Meal';
+import { keys } from 'ts-transformer-keys';
 import { v4 as uuid } from 'uuid';
+import {IMeal} from '../types';
 export const mealRouter = Router();
 
 mealRouter
-    .get('/', async (req, res, next) => {
+    .get('/:name', async (req, res, next) => {
         try {
-            const users = await Meal.findAll();
-            res.status(200).json(users);
+            const {count, rows} = await Meal.findAndCountAll({
+                where: {name: req.params.name},
+                include:keys<IMeal> ()
+            });
+            if(count>0) {
+                res.status(200).json(rows);
+            }
         } catch (e) {
             next(e);
         }
     })
-    // .post('/:name', async (req, res, next) => {
+    // .get('/:name/', async (req, res, next) => {
     //     try {
     //         const user = await Meal.create({
     //             userId: uuid(),
