@@ -8,4 +8,5 @@ export interface IMeal{
     ytLink: string,
     queryName: string,
     imagePath: string,
+    imageUrl: string,
 }

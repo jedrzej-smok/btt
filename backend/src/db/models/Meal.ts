@@ -37,6 +37,9 @@ export class Meal extends Model<Meal> {
   @Column(DataType.TEXT)
   imagePath: string;
 
+  @Column(DataType.TEXT)
+  imageUrl: string;
+
 
 
   @CreatedAt

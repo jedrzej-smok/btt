@@ -13,10 +13,11 @@ export const seed = async() : Promise<void|string> => {
         id: 522,
         name:'test',
         instructions: 'test',
-        ingredientsNumber: 'test',
+        ingredientsNumber: 1,
         ytLink: 'test',
         queryName: 'test-query',
         imagePath: 'path',
+        imageUrl: 'url',
         creationDate:new Date(),
         updatedOn:new Date(),
         deletionDate:null

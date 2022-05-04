@@ -45,9 +45,10 @@ mealRouter
                             ingredientsNumber:calcIngredient(meal),
                             ytLink:meal.strYoutube,
                             queryName: req.params.name,
-                            imagePath: meal.strMealThumb
+                            imageUrl: meal.strMealThumb,
+                            imagePath: ''
                         }
-                        const { queryName,imagePath,...simpleMeal} = storedMeal;
+                        const { queryName,imagePath,imageUrl,...simpleMeal} = storedMeal;
                         resMeal.push(simpleMeal);
                         await Meal.create(storedMeal);
                     }
@@ -63,16 +64,4 @@ mealRouter
             next(e);
         }
     })
-    // .get('/:name/', async (req, res, next) => {
-    //     try {
-    //         const user = await Meal.create({
-    //             userId: uuid(),
-    //             email: `${req.params.name}@example.com`,
-    //             name:`${req.params.name}`,
-    //             birthday: new Date(2000,1,1),
-    //         });
-    //         res.status(201).json(user);
-    //     } catch (e) {
-    //         next(e);
-    //     }
-    // });
+
