@@ -23,13 +23,13 @@ export class Meal extends Model<Meal> {
   name!: string;
 
   @Column(DataType.TEXT)
-  instructions!: string;
+  instructions: string;
 
   @Column(DataType.TEXT)
-  ingredientsNumber!: string;
+  ingredientsNumber: string;
 
   @Column(DataType.TEXT)
-  ytLink!: string;
+  ytLink: string;
 
 
 
