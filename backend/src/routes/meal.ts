@@ -4,6 +4,7 @@ import { keys } from 'ts-transformer-keys';
 import { v4 as uuid } from 'uuid';
 import {IMeal} from '../types';
 export const mealRouter = Router();
+const fetch = require('node-fetch');
 
 
 mealRouter
@@ -13,7 +14,7 @@ mealRouter
                 where: {name: req.params.name},
                 attributes:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
-            if(!meal) {
+            if(meal!==null) {
                 res.status(200).json(meal);
             }else{
                 const meals = await fetch('www.themealdb.com/api/json/v1/1/search.php?s='+req.params.name,{
@@ -21,7 +22,7 @@ mealRouter
                     headers: {},
                     body: null,
                 });
-                console.log(meals);
+                console.log(`meals: ${meals}`);
             }
         } catch (e) {
             next(e);
