@@ -4,6 +4,7 @@ import { keys } from 'ts-transformer-keys';
 import { v4 as uuid } from 'uuid';
 import {IMeal} from '../types';
 export const mealRouter = Router();
+import fetch from 'node-fetch';
 
 mealRouter
     .get('/:name', async (req, res, next) => {
