@@ -12,6 +12,10 @@ const fetch = require('node-fetch');
 mealRouter
     .get('/:name', async (req, res, next) => {
         try {
+            if( !new RegExp('^[a-zA-Z]*$').test(req.params.name)) {
+                res.status(400).json({message: `Invalid request. Name: ${req.params.name} include number or special characters.`});
+                return;
+            }
             const meals = await Meal.findAll({
                 where: {
                     queryName: {
