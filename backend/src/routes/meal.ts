@@ -8,12 +8,12 @@ export const mealRouter = Router();
 mealRouter
     .get('/:name', async (req, res, next) => {
         try {
-            const {count, rows} = await Meal.findAndCountAll({
+            const meal = await Meal.findOne({
                 where: {name: req.params.name},
                 attributes:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
-            if(count>0) {
-                res.status(200).json(rows);
+            if(!meal) {
+                res.status(200).json(meal);
             }else{
                 const meals = await fetch('www.themealdb.com/api/json/v1/1/search.php?s='+req.params.name,{
                     method: 'GET',
