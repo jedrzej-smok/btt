@@ -34,8 +34,8 @@ app.use('/meal', mealRouter);
 const port = process.env.NODE_DOCKER_PORT || 3000;
 
 (async () => {
-    await seed();
     await dbSyncModel(sequelize);
+    await seed();
     app.listen(port, () => {
         console.log(`Server is running on port ${process.env.NODE_LOCAL_PORT || 3000}.`);
         console.log(`Listening on http://localhost:${process.env.NODE_LOCAL_PORT || 3000}`);
