@@ -10,25 +10,28 @@ import {
   CreatedAt,
   PrimaryKey, IsUUID, Unique, IsEmail, BelongsToMany
 } from 'sequelize-typescript'
-import {Hobby} from "./Hobby";
-import {HobbyUser} from "./HobbyUser";
+
 
 @Table
-export class User extends Model<User> {
+export class Meal extends Model<Meal> {
 
-  @IsUUID(4)  @PrimaryKey
+  @PrimaryKey
   @Column
-  userId: string
-
-  @Unique(true) @IsEmail
-  @Column(DataType.TEXT)
-  email!: string
+  id: number
 
   @Column(DataType.TEXT)
   name!: string
 
-  @Column(DataType.DATEONLY)
-  birthday?: Date
+  @Column(DataType.TEXT)
+  instructions!: string
+
+  @Column(DataType.TEXT)
+  ingredientsNumber!: string
+
+  @Column(DataType.TEXT)
+  ytLink!: string
+
+
 
   @CreatedAt
   creationDate: Date;
@@ -38,8 +41,5 @@ export class User extends Model<User> {
 
   @DeletedAt
   deletionDate: Date;
-
-  @BelongsToMany(() => Hobby, () => HobbyUser)
-  movies?: User[];
 
 }

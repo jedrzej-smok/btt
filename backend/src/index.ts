@@ -8,7 +8,8 @@ import {static as eStatic, urlencoded} from "express";
 //local requires
 import {dbConnectionTest, dbCreate, dbSyncForceAndFill, dbSyncModel} from "./db/db-utils";
 import {handleError} from "./utils/errors";
-import {userRouter} from "./routes/user";
+import {mealRouter} from "./routes/meal";
+import { seed } from "./db/seeders/demo-seed";
 
 
 //config app
@@ -29,15 +30,14 @@ app.get("/", (req, res) => {
 //listen app
 app.use(handleError);
 
-app.use('/user', userRouter);
+app.use('/meal', mealRouter);
 const port = process.env.NODE_DOCKER_PORT || 3000;
 
 (async () => {
-    //await dbCreate();
+    await seed();
     await dbSyncModel(sequelize);
     app.listen(port, () => {
-        console.log(`Server is running on port ${port}.`);
-        console.log(`Listening on http://localhost:${port}`);
-        
+        console.log(`Server is running on port ${process.env.NODE_LOCAL_PORT || 3000}.`);
+        console.log(`Listening on http://localhost:${process.env.NODE_LOCAL_PORT || 3000}`);
     });
 })();
