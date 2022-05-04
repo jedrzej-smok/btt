@@ -17,19 +17,19 @@ export class Meal extends Model<Meal> {
 
   @PrimaryKey
   @Column
-  id: number
+  id: number;
 
   @Column(DataType.TEXT)
-  name!: string
+  name!: string;
 
   @Column(DataType.TEXT)
-  instructions!: string
+  instructions!: string;
 
   @Column(DataType.TEXT)
-  ingredientsNumber!: string
+  ingredientsNumber!: string;
 
   @Column(DataType.TEXT)
-  ytLink!: string
+  ytLink!: string;
 
 
 
