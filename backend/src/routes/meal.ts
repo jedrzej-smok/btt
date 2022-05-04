@@ -10,7 +10,7 @@ mealRouter
         try {
             const {count, rows} = await Meal.findAndCountAll({
                 where: {name: req.params.name},
-                include:keys<IMeal> ()
+                include:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
             if(count>0) {
                 res.status(200).json(rows);
