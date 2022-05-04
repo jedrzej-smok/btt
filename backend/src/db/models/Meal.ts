@@ -25,8 +25,8 @@ export class Meal extends Model<Meal> {
   @Column(DataType.TEXT)
   instructions: string;
 
-  @Column(DataType.TEXT)
-  ingredientsNumber: string;
+  @Column(DataType.INTEGER)
+  ingredientsNumber: number;
 
   @Column(DataType.TEXT)
   ytLink: string;
