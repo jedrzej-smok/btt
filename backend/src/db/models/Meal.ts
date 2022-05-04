@@ -17,10 +17,10 @@ export class Meal extends Model<Meal> {
 
   @PrimaryKey
   @Column
-  id: number;
+  id!: number;
 
   @Column(DataType.TEXT)
-  name!: string;
+  name: string;
 
   @Column(DataType.TEXT)
   instructions: string;
