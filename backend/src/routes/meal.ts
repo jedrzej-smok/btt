@@ -9,11 +9,18 @@ mealRouter
     .get('/:name', async (req, res, next) => {
         try {
             const {count, rows} = await Meal.findAndCountAll({
-                //where: {name: req.params.name},
-                // include:['id','name', 'instructions', 'ingredientsNumber','ytLink']
+                where: {name: req.params.name},
+                include:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
             if(count>0) {
                 res.status(200).json(rows);
+            }else{
+                const meals = await fetch('www.themealdb.com/api/json/v1/1/search.php?s='+req.params.name,{
+                    method: 'GET',
+                    headers: {},
+                    body: null,
+                });
+                console.log(meals);
             }
         } catch (e) {
             next(e);
