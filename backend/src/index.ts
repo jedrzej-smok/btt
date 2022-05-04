@@ -35,7 +35,8 @@ const port = process.env.NODE_DOCKER_PORT || 3000;
 
 (async () => {
     await dbSyncModel(sequelize);
-    await seed();
+    const res  = await seed();
+    console.log(res);
     app.listen(port, () => {
         console.log(`Server is running on port ${process.env.NODE_LOCAL_PORT || 3000}.`);
         console.log(`Listening on http://localhost:${process.env.NODE_LOCAL_PORT || 3000}`);
