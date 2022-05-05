@@ -75,7 +75,7 @@ mealRouter
                             [Op.substring]: req.params.name,
                         }
                     },
-                    attributes:['id','name', 'imagePath','imageUrl']
+                    attributes:['id','name', 'imagePath','imageUrl'],
                 });
                 let htmlResult="<!doctype html>\n" + "<html lang=\"en\">\n" + "<head>\n" + "    <meta charset=\"UTF-8\">\n" + "    <meta name=\"viewport\"\n" + "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" + "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" + "    <title>page</title>\n" + "<link rel=\"stylesheet\" href=\"/style.css\">" + "</head>\n" + "<body>\n" +"<ol> "
 
@@ -83,15 +83,15 @@ mealRouter
                 for(const meal of meals){
                     console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
                     if(meal.imagePath != ""){
-                        htmlResult += `<ul>` + " <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\">" + `${meal.name}` + "</ul>";
+                        htmlResult += `<ul>` + " <div class=\"container\"> <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\"> <p>" + `${meal.name}` + "</p> </div> </ul>";
                     }else{
                         await downloadImage(meal.imageUrl+'/preview', `./public/${meal.name}.jpg`);
-                        await Meal.update({imagePath:`${meal.name}.jpg`},{
+                         await Meal.update({imagePath:`${meal.name}.jpg`},{
                             where: {
                                 id:meal.id,
                             }
                         });
-                        htmlResult += `<ul>` + " <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\">" + `${meal.name}` + "</ul>";
+                        htmlResult += `<ul>` + " <div class=\"container\"> <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\"> <p>" + `${meal.name}` + "</p> </div> </ul>";
                     }
                 }
                 htmlResult += "</ol>"+"</body>\n" + "</html>";

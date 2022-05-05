@@ -1,3 +1,23 @@
+body{
+    font-family: "roboto",sans-serif;
+}
 ul {
-    margin: 10px;
+    margin: 30px;
+    padding: 20px;
+    background-color: #eee;
+    border-radius: 10%;
+}
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    width: 150px;
+}
+
+ol {
+    display: flex;
+    flex-flow: row wrap;
+}
+img{
+    width: 150px;
+    height: 150px;
 }
