@@ -10,7 +10,7 @@
 </pre>
 
 
-##Install and run:
+## Install and run:
 ## First (on Linux):
     $ sudo su
 
