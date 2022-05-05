@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import {IMeal} from '../types';
 import {calcIngredient} from "../utils/calcIngredient";
 import {Op, where} from "sequelize";
-import {downloadImage, timeout} from "../utils/downloadImage";
+import {downloadImage} from "../utils/downloadImage";
 export const mealRouter = Router();
 const fetch = require('node-fetch');
 
