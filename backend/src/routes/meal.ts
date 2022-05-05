@@ -4,7 +4,7 @@ import { keys } from 'ts-transformer-keys';
 import { v4 as uuid } from 'uuid';
 import {IMeal} from '../types';
 import {calcIngredient} from "../utils/calcIngredient";
-import {Op} from "sequelize";
+import {Op, where} from "sequelize";
 import {downloadImage} from "../utils/downloadImage";
 export const mealRouter = Router();
 const fetch = require('node-fetch');
@@ -78,16 +78,40 @@ mealRouter
                     attributes:['id','name', 'imagePath','imageUrl']
                 });
                 let mealNameImgPath = [];
+                // let htmlResult="<!doctype html>\n" +
+                //     "<html lang=\"en\">\n" +
+                //     "<head>\n" +
+                //     "    <meta charset=\"UTF-8\">\n" +
+                //     "    <meta name=\"viewport\"\n" +
+                //     "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" +
+                //     "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" +
+                //     "    <title>stronka</title>\n" +
+                //     "</head>\n" +
+                //     "<body>\n" +
+                //     "    <h1>Dance school</h1>\n" +
+                //     "    <hr>\n" +
+                //     "<img src=\'/pie.jpg\' alt=\"Flowers in Chania\">" +
+                //     "</body>\n" +
+                //     "</html>>";
+                let htmlResult="<!doctype html>\n" + "<html lang=\"en\">\n" + "<head>\n" + "    <meta charset=\"UTF-8\">\n" + "    <meta name=\"viewport\"\n" + "          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n" + "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n" + "    <title>page</title>\n" + "<link rel=\"stylesheet\" href=\"/style.css\">" + "</head>\n" + "<body>\n" +"<ol> "
+
+
                 for(const meal of meals){
-                    //console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
+                    console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
                     if(meal.imagePath != ""){
                         mealNameImgPath.push({name:meal.name, imagePath:meal.imagePath})
+                        htmlResult += `<ul>` + " <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\">" + `${meal.name}` + "</ul>"
                     }else{
                         await downloadImage(meal.imageUrl+'/preview', `./public/${meal.name}.jpg`);
-
+                        await Meal.update({imagePath:`${meal.name}.jpg`},{
+                            where: {
+                                id:meal.id
+                            }
+                        });
                     }
                 }
-                res.send('konieec');
+                htmlResult += "</ol>"+"</body>\n" + "</html>";
+                res.send(htmlResult);
             }else {
                 const {message} = await resFetch.json();
                 res.status(400).json({message: message});
