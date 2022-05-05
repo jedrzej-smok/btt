@@ -1,6 +1,17 @@
 # btt-app
+## Table of contents
+* [Requirements](#requirements)
+* [Install and run](#install-and-run)
+* [Databse diagrams](#database-diagrams)
 
-## First:
+## Requirements
+<pre>
+- <a href="https://docs.docker.com/engine/install/" title="download">download</a> and install Docker
+</pre>
+
+
+##Install and run:
+## First (on Linux):
     $ sudo su
 
 ## To build and create:
@@ -12,11 +23,11 @@
 ## To create database:
     $ docker exec -d  DATABASE-POSTGRES  psql  -h localhost -U postgres -c "create database btt_db"
 
-## To run:
+## To run app:
     $ docker-compose up -d
 
 
-## To stop:
+## To stop app:
     $ docker-compose down
 
 ## To remove all: 
