@@ -10,6 +10,7 @@ import {dbConnectionTest, dbCreate, dbSyncForceAndFill, dbSyncModel} from "./db/
 import {handleError} from "./utils/errors";
 import {mealRouter} from "./routes/meal";
 import { seed } from "./db/seeders/demo-seed";
+import {calcIngredient} from "./utils/calcIngredient";
 
 
 //config app
@@ -24,7 +25,7 @@ app.use(cookieParser());
 
 //routers
 app.get("/", (req, res) => {
-    res.send("haha<h1>haha</h1");
+    res.send(200);
   });
 
 //listen app
@@ -35,8 +36,6 @@ const port = process.env.NODE_DOCKER_PORT || 3000;
 
 (async () => {
     await dbSyncModel(sequelize);
-    // const res  = await seed();
-    // console.log(res);
     app.listen(port, () => {
         console.log(`Server is running on port ${process.env.NODE_LOCAL_PORT || 3000}.`);
         console.log(`Listening on http://localhost:${process.env.NODE_LOCAL_PORT || 3000}`);

@@ -26,7 +26,7 @@ mealRouter
                 attributes:['id','name', 'instructions', 'ingredientsNumber','ytLink']
             });
             if(meals.length > 0) {
-                console.log('z bazy');
+                // console.log('from database');
                 res.status(200).json(meals);
             }else{
                 const resFetch = await fetch('http://themealdb.com/api/json/v1/1/search.php?s='+req.params.name,{
@@ -38,7 +38,6 @@ mealRouter
                 if(meals!=null){
                     let resMeal:Partial<IMeal> [] = [];
                     for(const meal of meals){
-                        console.log(meal);
                         const storedMeal:IMeal = {
                             id: meal.idMeal,
                             name:meal.strMeal,
@@ -51,7 +50,9 @@ mealRouter
                         }
                         const { queryName,imagePath,imageUrl,...simpleMeal} = storedMeal;
                         resMeal.push(simpleMeal);
-                        await Meal.create(storedMeal);
+                        try {
+                            await Meal.create(storedMeal);
+                        }catch (e) {}
                     }
 
                     res.status(200).json(resMeal);
@@ -81,7 +82,7 @@ mealRouter
 
 
                 for(const meal of meals){
-                    console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
+                    //console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
                     if(meal.imagePath != ""){
                         htmlResult += `<ul>` + " <div class=\"container\"> <img src=\'/" + meal.imagePath + "\' alt=\"Flowers in Chania\"> <p>" + `${meal.name}` + "</p> </div> </ul>";
                     }else{
