@@ -2,7 +2,6 @@
 ## Table of contents
 * [Requirements](#requirements)
 * [Install and run](#install-and-run)
-* [Databse diagrams](#database-diagrams)
 
 ## Requirements
 <pre>
