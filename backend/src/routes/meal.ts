@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 import {IMeal} from '../types';
 import {calcIngredient} from "../utils/calcIngredient";
 import {Op} from "sequelize";
+import {downloadImage} from "../utils/downloadImage";
 export const mealRouter = Router();
 const fetch = require('node-fetch');
 
@@ -60,6 +61,38 @@ mealRouter
 
 
             }
+        } catch (e) {
+            next(e);
+        }
+    })
+    .get('/:name/img', async (req, res, next) => {
+        try {
+            const resFetch = await fetch('http://localhost:8080/meal/'+req.params.name,{});
+            if(resFetch.status === 200){
+                const meals = await Meal.findAll({
+                    where: {
+                        queryName: {
+                            [Op.substring]: req.params.name,
+                        }
+                    },
+                    attributes:['id','name', 'imagePath','imageUrl']
+                });
+                let mealNameImgPath = [];
+                for(const meal of meals){
+                    //console.log(`${meal.name}: ${meal.imageUrl} ${meal.imagePath}`);
+                    if(meal.imagePath != ""){
+                        mealNameImgPath.push({name:meal.name, imagePath:meal.imagePath})
+                    }else{
+                        await downloadImage(meal.imageUrl+'/preview', `./public/${meal.name}.jpg`);
+
+                    }
+                }
+                res.send('konieec');
+            }else {
+                const {message} = await resFetch.json();
+                res.status(400).json({message: message});
+            }
+
         } catch (e) {
             next(e);
         }

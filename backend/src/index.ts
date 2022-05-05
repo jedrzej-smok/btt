@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 //routers
 app.get("/", (req, res) => {
-    res.json({ message: "app.js" });
+    res.send("haha<h1>haha</h1");
   });
 
 //listen app
