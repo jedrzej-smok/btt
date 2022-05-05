@@ -38,5 +38,9 @@
 
 ## Open application
     http://localhost:6868
+    http://localhost:6868/meal/Bean/
+    http://localhost:6868/meal/Chicken/
+    http://localhost:6868/meal/Duck/img
+
 
 
