@@ -15,8 +15,7 @@
     $ git clone https://github.com/jedrzej-smok/btt.git
     $ cd btt
     
-## First (on Linux):
-    $ sudo su
+
 
 ## To build and create:
     $ docker-compose create --build
